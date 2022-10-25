@@ -1,0 +1,884 @@
+
+<!doctype html>
+<html lang="hr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="My site">
+      
+      
+        <meta name="author" content="Luka Ljubojevic">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
+    
+    
+      
+        <title>Wireguard in Docker - Luka Ljubojevic</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#creating-a-docker-based-vpn-using-wireguard" class="md-skip">
+          Preskočite na sadržaj
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Zaglavlje">
+    <a href=".." title="Luka Ljubojevic" class="md-header__button md-logo" aria-label="Luka Ljubojevic" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Luka Ljubojevic
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Wireguard in Docker
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Pretraživanje" placeholder="Pretraživanje" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pretraživanje">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Očisti" aria-label="Očisti" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicijaliziranje pretraživanja
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Kartice" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../about.html" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../demonstrature.html" class="md-tabs__link">
+      Demonstrature
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../notes.html" class="md-tabs__link md-tabs__link--active">
+        Notes
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigacija" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Luka Ljubojevic" class="md-nav__button md-logo" aria-label="Luka Ljubojevic" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Luka Ljubojevic
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../demonstrature.html" class="md-nav__link">
+        Demonstrature
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Notes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notes.html" class="md-nav__link">
+        About notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="displ.html" class="md-nav__link">
+        Fix display glitches with switchable graphics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="moodle.html" class="md-nav__link">
+        Installing moodle using Ansible
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="manage.html" class="md-nav__link">
+        Managing Computer Systems
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="systemd.html" class="md-nav__link">
+        Systemd tutorial
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vm.html" class="md-nav__link">
+        Virtual machines using cloud-init
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="wg.html" class="md-nav__link md-nav__link--active">
+        Wireguard in Docker
+      </a>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Sadržaj">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="creating-a-docker-based-vpn-using-wireguard">Creating a Docker-based VPN using WireGuard</h1>
+<p>Created for doc. dr. sc. <a href="https://vedran.miletic.net/">Vedran Miletić</a> to create teaching materials for course <a href="https://group.miletic.net/hr/nastava/materijali/wireguard-virtualna-privatna-mreza/">Security of Information and Communication Systems</a></p>
+<p>A <a href="https://en.wikipedia.org/wiki/Virtual_private_network">virtual private network</a> (VPN) provides private network services using a public network such as the Internet. With a VPN, we can send and receive data over a public network while using a private LAN configuration. VPN uses various security mechanisms to ensure the confidentiality and authenticity of the data we send. A virtual private network can be created with a number of protocols, such as <a href="https://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol">L2TP</a> on the link layer (which implements <a href="https://github.com/xelerance/xl2tpd">xl2tpd</a>), <a href="https://en.wikipedia.org/wiki/IPsec">IPsec</a> on the network layer (which implements <a href="https://www.strongswan.org/">strongSwan</a>) and <a href="https://en.wikipedia.org/wiki/Secure_Socket_Tunneling_Protocol">SSTP</a>  on the transport layer (which implements  <a href="https://www.softether.org/">SoftEther VPN</a>).</p>
+<p>WireGuard is a very simple but modern VPN server and client that uses the latest cryptographic technologies. It aims to be faster, simpler, more reliable and more useful than IPsec. It is also a serious competition to OpenVPN.</p>
+<p>It was initially released for Linux kernel-based systems, but has now become a multi-platform solution for establishing a VPN network. The development of WireGuard is still ongoing, although it is already considered the safest and easiest to use VPN solution in the industry.</p>
+<p>WireGuard uses state-of-the-art cryptographic technologies such as:
+* <a href="http://www.noiseprotocol.org/">Noise protocol framework</a>, 
+* <a href="https://en.wikipedia.org/wiki/Curve25519">Curve25519</a>, 
+* <a href="https://www.cryptopp.com/wiki/ChaCha20">ChaCha20</a>, 
+* <a href="https://en.wikipedia.org/wiki/Poly1305">Poly1305</a>, 
+* <a href="https://www.blake2.net/">BLAKE2</a>, 
+* <a href="https://en.wikipedia.org/wiki/SipHash">SipHash24</a>, 
+* <a href="https://en.wikipedia.org/wiki/HKDF">HKDF</a></p>
+<p>With the release of the Linux kernel 5.6, the version of WireGuard for the Linux platform is moving to a stable production release and is being built into the Linux kernel itself. Because the Linux kernel, and its components, are open source (GNU General Public License (GPL) version 2), by merging WireGuard with the Linux kernel, the source code becomes available to the general public.</p>
+<p>After connecting the WireGuard client to the WireGuard server (described below), a tunnel is created through the Internet through which data is then sent. The data passing through the tunnel is encrypted so that third parties on the Internet cannot read it, and various types of compression can be used to make the data smaller.</p>
+<h1 id="setting-up-wireguard-vpn-using-docker">Setting up WireGuard VPN using Docker</h1>
+<h2 id="installing-docker">Installing Docker</h2>
+<h3 id="if-you-are-not-a-sudo-user">If you are not a sudo user:</h3>
+<p>Ask your administrator to install Docker with the command:
+* Ubuntu-based distros:</p>
+<pre><code class="language-shell">sudo apt-get install docker docker-compose
+</code></pre>
+<ul>
+<li>Arch-based distros:</li>
+</ul>
+<pre><code class="language-shell">sudo pacman -S docker docker-compose
+</code></pre>
+<p>Then install all Docker dependencies:
+* Ubuntu-based distros:</p>
+<pre><code class="language-shell">sudo apt-get install -y dbus-user-session
+sudo apt-get install -y uidmap
+</code></pre>
+<ul>
+<li>Arch-based distros:</li>
+</ul>
+<pre><code class="language-shell">sudo pacman -S shadow
+sudo pacman -S fuse-overlayfs
+</code></pre>
+<p>Zatim ugasite Docker servis naredbom:</p>
+<pre><code class="language-shell">sudo systemctl disable --now docker.service docker.socket
+</code></pre>
+<p>Before installing Docker alata Docker you must generate subuid and subgid.
+<a href="https://man7.org/linux/man-pages/man5/subuid.5.html">Subuid</a> authorizes the user ID to map the range of user IDs from its namespace to child namespaces.
+<a href="https://man7.org/linux/man-pages/man5/subgid.5.html">Subgid</a> authorizes the user group ID to map the range of group IDs from its namespaces to child namespaces.</p>
+<p>To generate subuids and subgids, you need to write a Python script with the following code:</p>
+<pre><code class="language-python">f = open(&quot;/etc/subuid&quot;, &quot;w&quot;)
+for uid in range(1000, 65536):
+    f.write(&quot;%d:%d:65536\n&quot; %(uid,uid*65536))
+f.close()
+
+f = open(&quot;/etc/subgid&quot;, &quot;w&quot;)
+for uid in range(1000, 65536):
+    f.write(&quot;%d:%d:65536\n&quot; %(uid,uid*65536))
+f.close()
+</code></pre>
+<p>Then we execute the Python script and install Docker from the repository "<a href="https://docs.docker.com/engine/security/rootless/">rootless</a>":</p>
+<pre><code class="language-shell">sudo python3 uid.py
+curl -fsSL https://get.docker.com/rootless | sh
+</code></pre>
+<p>After installation, if you use systems based on Ubuntu distribution, mark variables and functions that are passed to subordinate processes ("export"):</p>
+<pre><code class="language-shell">export PATH=/home/lljubojevic/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
+</code></pre>
+<p>Set the appropriate access permissions for your Docker user with the command:</p>
+<pre><code class="language-shell">sudo chmod 666 /var/run/docker.sock
+</code></pre>
+<p>Finally, to configure the WireGuard client server, execute port traffic acceptance commands that the WireGuard server will use:</p>
+<pre><code class="language-shell">sudo ufw allow 51820
+sudo iptables -I INPUT -p tcp -m tcp --dport 51820 -j ACCEPT
+</code></pre>
+<p>Then, start Docker as a rootless user:</p>
+<pre><code class="language-shell">systemctl --user enable docker
+systemctl --user start docker
+</code></pre>
+<h3 id="if-you-are-a-sudo-user">If you are a sudo user:</h3>
+<p>Install Docker this way:
+* Ubuntu-based distros:</p>
+<pre><code class="language-shell">sudo apt-get install docker docker-compose
+</code></pre>
+<ul>
+<li>Arch-based distros:</li>
+</ul>
+<pre><code class="language-shell">sudo pacman -S docker docker-compose
+</code></pre>
+<p>Start Docker service using:</p>
+<pre><code class="language-shell">sudo systemctl enable --now docker.service docker.socket
+</code></pre>
+<p>Additionally, if you want to start Docker at startup, run the command:
+* Ubuntu-based distros:</p>
+<pre><code class="language-shell">sudo loginctl enable-linger $(whoami)
+</code></pre>
+<ul>
+<li>Arch-based distros:</li>
+</ul>
+<pre><code class="language-shell">sudo loginctl enable-linger (whoami)
+</code></pre>
+<h2 id="wireguard-vpn-server-setup">WireGuard VPN Server Setup</h2>
+<p>Assuming you have administrator privileges, to configure the WireGuard client server, execute port traffic acceptance commands that the WireGuard server will use:</p>
+<pre><code class="language-shell">sudo ufw allow 51820
+sudo iptables -I INPUT -p tcp -m tcp --dport 51820 -j ACCEPT
+</code></pre>
+<p>Make a directory:</p>
+<pre><code class="language-shell">mkdir wireguard-server
+</code></pre>
+<p>In that directory create a "docker-compose.yaml" file:</p>
+<pre><code class="language-shell">nano docker-compose.yaml
+</code></pre>
+<p><strong>docker-compose.yaml for server</strong>:</p>
+<pre><code class="language-shell">version: &quot;2.1&quot;
+services:
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: wireguard-server
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zagreb
+      - SERVERURL=10.13.13.1
+      - SERVERPORT=51820
+      - PEERS=1
+      - PEERDNS=auto
+    volumes:
+      - /home/lljubojevic/wireguard-server/config:/config
+      - /home/lljubojevic/wireguard-server/modules:/lib/modules
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    restart: unless-stopped
+</code></pre>
+<p>Then execute the creation of a Docker WireGuard VPN server container:</p>
+<pre><code>docker-compose up -d
+</code></pre>
+<p><strong>Does it work?:</strong>
+If the command:</p>
+<pre><code class="language-shell">docker logs wireguard-server
+</code></pre>
+<p>shows output as:</p>
+<pre><code class="language-shell">[s6-init] making user provided files available at /var/run/s6/etc...exited 0.
+[s6-init] ensuring user provided files have correct perms...exited 0.
+[fix-attrs.d] applying ownership &amp; permissions fixes...
+[fix-attrs.d] done.
+[cont-init.d] executing container initialization scripts...
+[cont-init.d] 01-envfile: executing... 
+[cont-init.d] 01-envfile: exited 0.
+[cont-init.d] 01-migrations: executing... 
+[migrations] started
+[migrations] no migrations found
+[cont-init.d] 01-migrations: exited 0.
+[cont-init.d] 02-tamper-check: executing... 
+[cont-init.d] 02-tamper-check: exited 0.
+[cont-init.d] 10-adduser: executing... 
+
+-------------------------------------
+_         ()
+| |  ___   _    __
+| | / __| | |  /  \ 
+| | \__ \ | | | () |
+|_| |___/ |_|  \__/
+
+
+Brought to you by linuxserver.io
+-------------------------------------
+
+To support the app dev(s) visit:
+WireGuard: https://www.wireguard.com/donations/
+
+To support LSIO projects visit:
+https://www.linuxserver.io/donate/
+-------------------------------------
+GID/UID
+-------------------------------------
+
+User uid:    1000
+User gid:    1000
+-------------------------------------
+
+[cont-init.d] 10-adduser: exited 0.
+[cont-init.d] 30-module: executing... 
+Uname info: Linux 12320232623e 5.16.10-zen1-1-zen #1 ZEN SMP PREEMPT Wed, 16 Feb 2022 19:35:21 +0000 x86_64 x86_64 x86_64 GNU/Linux
+**** It seems the wireguard module is already active. Skipping kernel header install and module compilation. ****
+[cont-init.d] 30-module: exited 0.
+[cont-init.d] 40-confs: executing... 
+**** Server mode is selected ****
+**** External server address is set to 10.13.13.1 ****
+**** External server port is set to 51820. Make sure that port is properly forwarded to port 51820 inside this container ****
+**** Internal subnet is set to 10.13.13.0 ****
+**** AllowedIPs for peers 0.0.0.0/0, ::/0 ****
+**** PEERDNS var is either not set or is set to &quot;auto&quot;, setting peer DNS to 10.13.13.1 to use wireguard docker host's DNS. ****
+**** Server mode is selected ****
+**** Server related environment variables changed, regenerating 1 server and 1 peer/client confs ****
+PEER 1 QR code:
+█████████████████████████████████████████████████████████████████
+█████████████████████████████████████████████████████████████████
+████ ▄▄▄▄▄ █▀▀█▄█ ▄▄ ▄██ ▄▀▀▄▄▄ ▄█ ▄▄▄▄▄▀▄ █▄ ▄█▄▀▄ ██ ▄▄▄▄▄ ████
+████ █   █ █▄█ ▀▀▄███ ▄ █▄▄█▄▀▄█▄▀ ▄▄█ █▄▀▀▄▄▀▀▄▄▀▄ ██ █   █ ████
+████ █▄▄▄█ █ █▄▀▄▄████ ▀██▀▀▄  ▄▄▄ ▀ ▄██▄▀▄ █  ▀▀▄▀▄██ █▄▄▄█ ████
+████▄▄▄▄▄▄▄█ ▀ █ █ ▀ ▀ ▀ ▀ ▀▄█ █▄█ ▀▄▀▄█▄█ ▀▄█▄▀ ▀ ▀▄█▄▄▄▄▄▄▄████
+████  ▀▄█▀▄ ▀▄█  ▄▀██▀▄▀█  ▄▄▀▄ ▄▄▄▀█▀▄▄ ▀█▀█ █▀▄█▀▄▄█▄  ▀  ▀████
+████▀████▀▄  █ ▄█▀█ ▀▀▄█▄  ▀▀   ▀▀█▄█ █  ▀▀▄▀▄█   ▀▄▄ ▄ ▀ █  ████
+██████▀   ▄█▄▀▀ ▄▄██▀█▄▄▄ ▀   ▀█ ▀█ ▄ ▀ ▄█▄ ▄ █▄▄█▀▀▄ ▄ ▄█▄█▄████
+████ ▄    ▄ █▄▀▀█ █▀▄█▄██▄ ███▄███▄█ ▀▄▀▀  ▀▄ ██ █ █ █ ▀ ▄███████
+████  ▄▄▀▀▄▀ ▄ ▀▄ ▄██▄▄▄▀▄▀ ██ █ ▀▄▄ █▄▄▄█  ▀ █  ▄▄██▄  ▄█▀██████
+████▄▀▀▀█▀▄ ▄ ▄▀▀▀▄█ ▀▄███ ▄███▄ ▀▀▄ ▄▀▀▄ █▀▀ ▄▀ ███▀▀█▀▄███▄████
+█████ █▀█ ▄██▀█ ████ ▀▄ █▄▄▄ ▄▄   ▄ ▀▄█ ▄ █▄▄██▄█ ▄ ██▄ ▄▀▄██████
+████▀ ▄ ▀▀▄ █▀ ▄▄  █  ▄▀ █▄▀▀▀ ▀▄ ▀█ ▄█ ▄▀█ ▀▀▄▀▄█▄▄ ▄█  ▄▀█ ████
+████▀▄ ▄██▄ ███▀▀▄██▀  ▄█▄ █▄▀  ▄ █▀▀ ▀▀▄▄ ▀▄▀█▀▄▀ ██▀█▄   ▄ ████
+████ ▄▄█ ▄▄▄ ▄▄ ▀▄ ▄▀▀▀ ██▄  █ ▄▄▄ ▄▀   █ █▀ ▀█▄▀▀▄  ▄▄▄ █▄██████
+████▄ ▄▄ █▄█ ▄ ▀ ▀█▄█▄█▄▄██▄▄  █▄█ ▄ █▄▄ ▄▄▄▀█▄█▄▄█▄ █▄█ ▀▀█▀████
+████▄▀ ▄▄▄▄▄ ▄ ▀▀██ ██████ ▀▄▄▄ ▄▄ ▀▀▄ ████▀▀▄█  █▀   ▄▄ ▄█▄ ████
+████ ▀██▄ ▄ ▀▄▄▀▀▄ ▄█▀  ▄▀ █▄ ▀▄█ ▄▀█▀▄▀ ▄▄█▄▄▄ ▀▀█ ▀█▀▄█▀██▀████
+████ ▀█▄ █▄▄▄ ▀█▀███▀▄██▀▀█▀▀▀ ▄█▀▄▄▄▀▄▄▀█▀▄▄▄▄ █ ▄█▄▀ ▄█▀▄▄ ████
+████▀ ▄██ ▄█  ▄ ▀▄▄  ▀▄▀ █▄ ▄▄▀  ▄▄ ▄▄ ▀▄▀▄████▄ █   █  ▀▄█▀▄████
+█████▀▄▀▄▄▄▄▀▄█▀▀█  ▄▀▀█  ▄▀▄▀▄▄ ▀▄█▄ ▀█▄ ▄▄ ██▀█▀██▀ ▄▀▄█▄▀█████
+████▀▄▄█ █▄██▄ ▄ ▄ █▄▄ █  ▀ ▄  ███   ▀██▄  ▀ ▄▀▄▄▀▄█▀▄ █▄▀ ▄▄████
+████ ▄▀███▄▀  ▄█▀ █▀ █▄█  █▀ █▄▀▀█ ▀█  ▀   ▀▄▄▀ ██ ██▄ ▀▀███▄████
+████▀█▄▀▀▀▄▄ ▄▀ █  ▄▄▄▄█▄ █ █▀█▀▄ █ ██▄▀ ███ ▀▄ ▀█▄ █▀ █▄▀██▀████
+████ ▀ ▀▀▄▄▀  ▀▀▀▀▄▀ ▄▄▄▄█   ▀▄▀█▀  █ ▄█▀▄▀█▀█▀ ▄▀▄  ▀ ▄█ ██ ████
+██████████▄█ ▀▄█   █ ▄▄▀█▄ █▄█ ▄▄▄ ▀▄▀ ▄▄▀▄█ █▄▄ ▄▀█ ▄▄▄ ▄█ ▄████
+████ ▄▄▄▄▄ █▄   ▄█▀▄▄ ▀█▄▀▄  ▀ █▄█    █▀▄▀▄██▀ ▄▀█▀▀ █▄█ █▄ ▀████
+████ █   █ █▀▄█▀ ▀▄█▀█▄▀   ▀ ▄▄    ▀▄▀█▄▀█ ▀█▀█▀ █▄█  ▄  ██ ▀████
+████ █▄▄▄█ █▀█▀▄▀▄███ ▄▄▄█ █▀▄▀▄▄ ▄▀▄▄▀█▄ ▀█▄▀ ▄▄  ▀▄ █  ▄▄█▄████
+████▄▄▄▄▄▄▄█▄█▄▄▄▄▄▄██▄▄▄▄▄███████▄██▄█▄██▄███████▄█▄█▄▄▄█▄▄█████
+█████████████████████████████████████████████████████████████████
+█████████████████████████████████████████████████████████████████
+[cont-init.d] 40-confs: exited 0.
+[cont-init.d] 90-custom-folders: executing...
+[cont-init.d] 90-custom-folders: exited 0.
+[cont-init.d] 99-custom-scripts: executing...
+[custom-init] no custom files found exiting...
+[cont-init.d] 99-custom-scripts: exited 0.
+[cont-init.d] done.
+[services.d] starting services
+[services.d] done.
+[#] ip link add wg0 type wireguard
+[#] wg setconf wg0 /dev/fd/63
+[#] ip -4 address add 10.13.13.1 dev wg0
+[#] ip link set mtu 1420 up dev wg0
+[#] ip -4 route add 10.13.13.2/32 dev wg0
+[#] iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+.:53
+CoreDNS-1.9.0
+linux/amd64, go1.17.6, ace3dcb
+</code></pre>
+<p>It works!</p>
+<h2 id="wireguard-vpn-client-setup">WireGuard VPN Client Setup</h2>
+<p>Make a directory:</p>
+<pre><code class="language-shell">mkdir wireguard-klijent
+</code></pre>
+<p>In that directory create the "docker-compose.yaml" file:</p>
+<pre><code class="language-shell">nano docker-compose.yaml
+</code></pre>
+<p><strong>docker-compose.yaml for client</strong>:</p>
+<pre><code class="language-shell">version: '3.7'
+services:
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: wireguard-klijent
+    restart: unless-stopped
+    networks:
+      - backbone
+    volumes:
+      - './wireguard:/config'
+      - '/lib/modules:/lib/modules:ro'
+    environment:
+      - PUID=1000
+      - PGID=1000
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+
+networks:
+  backbone:
+    driver: bridge
+</code></pre>
+<p>It is necessary to generate a docker container for the client, which is not currently functional, in order for a creation of the configuration directory:</p>
+<pre><code class="language-shell">docker-compose up -d
+</code></pre>
+<p>Then, after launching the container, it is necessary to create a WireGuard network interface through which the client communicates with the server:</p>
+<pre><code class="language-shell">docker exec -it wireguard-klijent ip link add dev wg0 type wireguard
+</code></pre>
+<p>When the server is generated, a "peer" configuration file called "peerX.conf" will also be created. The contents of this file need to be overwritten in the wg0.conf file, which will be located in the wireguard-client directory.
+Let's do that:</p>
+<pre><code class="language-shell">cp ./wireguard-server/config/peer/peer1.conf ./wireguard-klijent/wireguard/wg0.conf
+</code></pre>
+<p>Change the wg0.conf file as following:</p>
+<pre><code class="language-shell">[Interface]
+Address = 10.13.13.2
+PrivateKey = 8NWt7q+Vg2f5IdULtIZQ06osuEfNZI4aOf3fjp0CTXY=
+ListenPort = 51820
+DNS = 10.13.13.1
+
+[Peer]
+PublicKey = nRWxNsBzC+bre4qzjLsWQp8Y9vo82JYF7N8XNLiTaxQ=
+Endpoint = 10.13.13.1:51820
+AllowedIPs = 0.0.0.0/0, ::/0
+</code></pre>
+<p>Notes:
+* If you set a parameter from the server configuration to a number greater than one (PEERS = n) n directories for nodes and configurations for them will be created, the instructions assume that you have only one client node.
+* The wg0.conf file may vary.
+* </p>
+<h2 id="testing-the-client-server-vpn-architecture">Testing the Client-Server VPN architecture:</h2>
+<pre><code class="language-shell">docker exec -it wireguard-server curl -w &quot;\n&quot; ifconfig.me
+46.188.154.181
+
+docker exec -it wireguard-klijent curl -w &quot;\n&quot; ifconfig.me
+46.188.154.181
+</code></pre>
+<p>If the IP addresses are the same, the configuration is valid.
+The IP address displayed is your current (or permanent) IP address by which you access the Internet.</p>
+<h1 id="explanation-of-configuration-parameters-in-docker-composeyaml-file">Explanation of configuration parameters in docker-compose.yaml file</h1>
+<p>Server side must contain parameters:
+* version: "2.1" - the required version of the docker-compose tool
+* services: - services started by the container
+* wireguard: - service name
+* image: - the requested image that the Docker tool retrieves from its repository, and container_name: - arbitrary container name.
+* cap_add: - gives the container elevated permissions on the host computer and allows it to interact with the host's network interfaces.
+* environment: - environment settings inside the Docker container
+    * PUID and PGID - variables that define the user and group
+    * TZ = Europe / Zagreb - container time zone, needs to be defined
+    * SERVERURL - server domain name (can be empty, defined by the public IP address of the server or set to automatic configuration)
+    * SERVERPORT - the door on which the server opens
+    * PEERS - number of nodes in the VPN network (can be number or type name: laptop, tablet, phone)
+    * PEERDNS - when set to auto, the container adjusts the DNS settings itself
+* volumes: - directories on the host that the container may use
+* ports: - the door that the container may use
+* sysctls: - parameters that allow the container to communicate with networks externally
+* restart: - defines in which cases the container may be restarted.</p>
+<h1 id="sources">Sources</h1>
+<p><a href="https://www.pedrolamas.com/2020/11/20/how-to-connect-to-a-wireguard-vpn-server-from-a-docker-container/">Pedrolamas</a>
+<a href="https://markontech.com/linux/install-wireguard-vpn-server-with-docker/">Markontech</a>
+<a href="https://spad.uk/wireguard-as-a-vpn-client-in-docker-using-pia/">Spad.uk</a></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Podnožje" >
+      
+        
+        <a href="vm.html" class="md-footer__link md-footer__link--prev" aria-label="Prethodno: Virtual machines using cloud-init" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Prethodno
+              </span>
+              Virtual machines using cloud-init
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["announce.dismiss", "header.autohide", "navigation.instant", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tracking", "toc.follow"], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Kopirano u me\u0111uspremnik", "clipboard.copy": "Kopirajte u me\u0111uspremnik", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Pretra\u017eivanje", "search.result.more.one": "1 rezultat na ovoj stranici", "search.result.more.other": "# rezultata na ovoj stranici", "search.result.none": "Ni\u0161ta nije prona\u0111eno", "search.result.one": "1 rezultat pretra\u017eivanja", "search.result.other": "# rezultata pretra\u017eivanja", "search.result.placeholder": "Unesite pojam pretra\u017eivanja", "search.result.term.missing": "Nedostaje", "select.version.title": "Odabir verzije"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      
+    
+  </body>
+</html>
