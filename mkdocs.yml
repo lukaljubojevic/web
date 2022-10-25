@@ -1,0 +1,46 @@
+site_name: Luka Ljubojevic
+site_description: My site
+site_url: ""
+use_directory_urls: false
+site_author: Luka Ljubojevic
+nav:
+  - About: about.md
+  - Demonstrature: demonstrature.md
+  - Notes: 
+      - About notes: notes.md
+      - Fix display glitches with switchable graphics: notes/displ.md
+      - Installing moodle using Ansible: notes/moodle.md
+      - Managing Computer Systems: notes/manage.md
+      - Systemd tutorial: notes/systemd.md
+      - Virtual machines using cloud-init: notes/vm.md
+      - Wireguard in Docker: notes/wg.md
+
+theme:
+  name: material
+  features:
+    - announce.dismiss
+    - header.autohide
+    - navigation.instant
+    - navigation.indexes
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tracking
+    - toc.follow
+  language: hr
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: light blue
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+
