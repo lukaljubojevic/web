@@ -969,20 +969,18 @@ enter AES-256-CTR encryption password: mojTajniPass
 U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==
 </code></pre>
 <p>Kako ćemo napraviti autorizaciju PHP kodom?</p>
-<p>```php=
-&lt;?php</p>
-<p>$request_headers = getallheaders();
-if (array_key_exists("Authorization", $request_headers) &amp;&amp; $request_headers["Authorization"] == "U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==") {
-    echo "<p>Tajni podaci NASA USA CIA</p>\n";
+<pre><code class="language-php">&lt;?php
+
+$request_headers = getallheaders();
+if (array_key_exists(&quot;Authorization&quot;, $request_headers) &amp;&amp; $request_headers[&quot;Authorization&quot;] == &quot;U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==&quot;) {
+    echo &quot;&lt;p&gt;Tajni podaci NASA USA CIA&lt;/p&gt;\n&quot;;
 } else {
     http_response_code(401);
-    echo "<p>Ruski hakleru bizi!</p>\n";
-}</p>
-<pre><code>
-Pokrenimo kod i testirajmo:
-
-```shell
-lljubojevic@IdeaPad5-Pro:~/Desktop$ mkdir public
+    echo &quot;&lt;p&gt;Ruski hakleru bizi!&lt;/p&gt;\n&quot;;
+}
+</code></pre>
+<p>Pokrenimo kod i testirajmo:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop$ mkdir public
 lljubojevic@IdeaPad5-Pro:~/Desktop$ mv moj2php.php public/index.php
 lljubojevic@IdeaPad5-Pro:~/Desktop$ php -S localhost:8000 -t public
 </code></pre>
@@ -1038,22 +1036,19 @@ U jeziku PHP moguće je implementirati HTTP autentifikaciju korištenjem funkcij
 Nakon primanja idućeg zahtjeva koji sadrži zaglavlje Authorization s odgovarajućom vrijednosti, u polju $_SERVER su dodane vrijednosti $_SERVER["AUTH_TYPE"], $_SERVER["PHP_AUTH_USER"] i $_SERVER["PHP_AUTH_PW"] koje sadrže tip autentifikacije, korisničko ime i zaporku (respektivno).</p>
 </blockquote>
 <p>PHP autentifikacija</p>
-<p>```php=
-&lt;?php
-if ($_SERVER["PHP_AUTH_USER"] == 'ilijacvorovic' &amp;&amp; $_SERVER["PHP_AUTH_PW"] == 'sokol' ) {
-    $user = $_SERVER["PHP_AUTH_USER"];
-    $pw = $_SERVER["PHP_AUTH_PW"];
-    echo "<p>Halo, ovdje $user...</p>\n";
+<pre><code class="language-php">&lt;?php
+if ($_SERVER[&quot;PHP_AUTH_USER&quot;] == 'ilijacvorovic' &amp;&amp; $_SERVER[&quot;PHP_AUTH_PW&quot;] == 'sokol' ) {
+    $user = $_SERVER[&quot;PHP_AUTH_USER&quot;];
+    $pw = $_SERVER[&quot;PHP_AUTH_PW&quot;];
+    echo &quot;&lt;p&gt;Halo, ovdje $user...&lt;/p&gt;\n&quot;;
 } else {
     http_response_code(401);
-    header("WWW-Authenticate: Basic realm=\"Tajni laboratorij Odjela za informatiku\"");
-    echo "<p>Moze centrala pogrijesiti jednom ali ne 100 puta!.</p>\n";
-}</p>
-<pre><code>
-Testiranje s ispravnim loginom:
-
-```shell
-lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -u ilijacvorovic:sokol http://localhost:8000/*   Trying 127.0.0.1:8000...
+    header(&quot;WWW-Authenticate: Basic realm=\&quot;Tajni laboratorij Odjela za informatiku\&quot;&quot;);
+    echo &quot;&lt;p&gt;Moze centrala pogrijesiti jednom ali ne 100 puta!.&lt;/p&gt;\n&quot;;
+}
+</code></pre>
+<p>Testiranje s ispravnim loginom:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -u ilijacvorovic:sokol http://localhost:8000/*   Trying 127.0.0.1:8000...
 * Connected to localhost (127.0.0.1) port 8000 (#0)
 * Server auth using Basic with user 'ilijacvorovic'
 &gt; GET / HTTP/1.1
@@ -1099,19 +1094,18 @@ lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -u ilijacvorovic:sokol http:/
 </code></pre>
 <h2 id="obrada-podataka-zapisanih-u-obliku-javascript-object-notation-json-u-jeziku-php">Obrada podataka zapisanih u obliku JavaScript Object Notation (JSON) u jeziku PHP</h2>
 <p>Kako radi json u PHP-u?</p>
-<p>```php=
-&lt;?php</p>
-<p>$arr1 = ["moja vrijednost", 1, 3.5, true];
-$arr2 = ["moj kljuc" =&gt; "moja vrijednost", "broj" =&gt; 8, "drugi broj" =&gt; 3.5, "je li istina" =&gt; true];</p>
-<p>$arr3 = $arr2;
-$arr3["polje"] = $arr1;
-$j3 = json_encode($arr3, JSON_PRETTY_PRINT);
-echo $j3;</p>
-<pre><code>
-Kako dekodirati json u php-u?
+<pre><code class="language-php">&lt;?php
 
-```php=
-&lt;?php
+$arr1 = [&quot;moja vrijednost&quot;, 1, 3.5, true];
+$arr2 = [&quot;moj kljuc&quot; =&gt; &quot;moja vrijednost&quot;, &quot;broj&quot; =&gt; 8, &quot;drugi broj&quot; =&gt; 3.5, &quot;je li istina&quot; =&gt; true];
+
+$arr3 = $arr2;
+$arr3[&quot;polje&quot;] = $arr1;
+$j3 = json_encode($arr3, JSON_PRETTY_PRINT);
+echo $j3;
+</code></pre>
+<p>Kako dekodirati json u php-u?</p>
+<pre><code class="language-php">&lt;?php
 $j = '{&quot;firstName&quot;:&quot;Ivan&quot;,&quot;lastName&quot;:&quot;Horvat&quot;,&quot;isAlive&quot;:true,&quot;age&quot;:19,&quot;address&quot;:{&quot;streetAddress&quot;:&quot;Radmile Matejčić 2a&quot;,&quot;city&quot;:&quot;Rijeka&quot;,&quot;state&quot;:&quot;Primorsko-goranska županija&quot;,&quot;postalCode&quot;:&quot;51000&quot;},&quot;jobTitle&quot;:&quot;junior software engineer&quot;,&quot;phoneNumbers&quot;:[{&quot;type&quot;:&quot;home&quot;,&quot;number&quot;:&quot;051/999-999&quot;},{&quot;type&quot;:&quot;office&quot;,&quot;number&quot;:&quot;099/999-9999&quot;}],&quot;twitterHandle&quot;:&quot;@IvanNajjaciHorvat&quot;,&quot;children&quot;:[],&quot;spouse&quot;:null}';
 $person = json_decode($j, true);
 print_r($person);
@@ -1194,47 +1188,48 @@ Array
 <pre><code class="language-shell">cGxlbmtp em9raQ== dmxhZG8= ZHpv emVsZW5rbw== emJvZw== dmFz bWkgamU= c2t1cA== cGxpbg== cGEgbmlzYW0= Z2FzZXI=
 </code></pre>
 <p>Napravimo PHP kod koji će pohraniti svakom "prijavljenom" korisniku neki enkritpirani ID u kolačić:</p>
-<p>```php=
-&lt;?php</p>
-<p>$file = "secretCodesOnFBserver.json";
+<pre><code class="language-php">&lt;?php
+
+$file = &quot;secretCodesOnFBserver.json&quot;;
 if (file_exists($file)) {
     $j = file_get_contents($file);
     $data = json_decode($j, true);
 } else {
     $data = [];
-}</p>
-<p>$tokeni = ["cGxlbmtp", "em9raQ==", "dmxhZG8=", "ZHpv", "emVsZW5rbw==","emJvZw==","dmFz","bWkgamU=","c2t1cA==", "cGxpbg==","cGEgbmlzYW0=","Z2FzZXI="];</p>
-<p>if ($_SERVER["REQUEST_URI"] == "/login") {
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        if (array_key_exists("user_id", $_COOKIE) &amp;&amp; array_key_exists($_COOKIE["user_id"], $data)) {
-            $user_id = $_COOKIE["user_id"];
+}
+
+$tokeni = [&quot;cGxlbmtp&quot;, &quot;em9raQ==&quot;, &quot;dmxhZG8=&quot;, &quot;ZHpv&quot;, &quot;emVsZW5rbw==&quot;,&quot;emJvZw==&quot;,&quot;dmFz&quot;,&quot;bWkgamU=&quot;,&quot;c2t1cA==&quot;, &quot;cGxpbg==&quot;,&quot;cGEgbmlzYW0=&quot;,&quot;Z2FzZXI=&quot;];
+
+if ($_SERVER[&quot;REQUEST_URI&quot;] == &quot;/login&quot;) {
+    if ($_SERVER[&quot;REQUEST_METHOD&quot;] == &quot;GET&quot;) {
+        if (array_key_exists(&quot;user_id&quot;, $_COOKIE) &amp;&amp; array_key_exists($_COOKIE[&quot;user_id&quot;], $data)) {
+            $user_id = $_COOKIE[&quot;user_id&quot;];
             $prev_token = $data[$user_id];
-            echo "<p>It is I, " . $prev_token . ".</p>\n";
+            echo &quot;&lt;p&gt;It is I, &quot; . $prev_token . &quot;.&lt;/p&gt;\n&quot;;
         } else {
         http_response_code(404);
-        echo "<p>Hmm.. sneaky? Tor?</p>\n";
+        echo &quot;&lt;p&gt;Hmm.. sneaky? Tor?&lt;/p&gt;\n&quot;;
     }
-    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    } else if ($_SERVER[&quot;REQUEST_METHOD&quot;] == &quot;POST&quot;) {
         $token_key = array_rand($tokeni);
     $tokeni = $tokeni[$token_key];
-        echo "<p>You've been Zucced as" . $tokeni . ".</p>\n";
-        if (array_key_exists("user_id", $_COOKIE) &amp;&amp; array_key_exists($_COOKIE["user_id"], $data)) {
-            $user_id = $_COOKIE["user_id"];
+        echo &quot;&lt;p&gt;You've been Zucced as&quot; . $tokeni . &quot;.&lt;/p&gt;\n&quot;;
+        if (array_key_exists(&quot;user_id&quot;, $_COOKIE) &amp;&amp; array_key_exists($_COOKIE[&quot;user_id&quot;], $data)) {
+            $user_id = $_COOKIE[&quot;user_id&quot;];
             $data[$user_id] = $tokeni;
         } else {
             $data[] = $tokeni;
             $user_id = array_key_last($data);
-            setcookie("user_id", $user_id);
+            setcookie(&quot;user_id&quot;, $user_id);
         }
     }
-}</p>
-<p>$j = json_encode($data);
-file_put_contents($file, $j);</p>
-<pre><code>
-Testirajmo metodama POST i GET s dvije prazne, različite, datoteke:
+}
 
-```shell
-lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -c cookies.txt -X POST http://localhost:8000/login
+$j = json_encode($data);
+file_put_contents($file, $j);
+</code></pre>
+<p>Testirajmo metodama POST i GET s dvije prazne, različite, datoteke:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -c cookies.txt -X POST http://localhost:8000/login
 *   Trying 127.0.0.1:8000...
 * Connected to localhost (127.0.0.1) port 8000 (#0)
 &gt; POST /login HTTP/1.1
