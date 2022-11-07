@@ -3,9 +3,11 @@
 ## Kontakt
 
 Za sva pitanja:
-[Boomerbook](https://www.facebook.com/luka.ljubojevic.946/)
-[Whatsapp](tel:0955293804)
-[Instagram](https://www.instagram.com/lukaljubojevic1/)
+
+* [Boomerbook](https://www.facebook.com/luka.ljubojevic.946/)
+* [Whatsapp](tel:0955293804)
+* [Instagram](https://www.instagram.com/lukaljubojevic1/)
+
 Iza 22h
 
 ## Instalacija Linuxa
@@ -263,4 +265,426 @@ if (!isset(vrijednost)){
 
 ```php
 echo ""<p>Moja poruka</p>\n";
+```
+
+## HTTP autentifikacija u jeziku PHP
+
+* HTTP Basic autentifikacija koristi base64 enkodirano korisničko ime i lozinku, naravno mi možemo i kriptirati naše podatke kojim god cipherom želimo..:
+  * više na [MMOS](https://gaseri.org/hr/nastava/kolegiji/MMOS/) kolegiju
+
+```shell
+openssl enc -chiphers
+```
+
+Kodiranje base64:
+
+```shell
+echo -n "encode me" | openssl enc -base64
+ZW5jb2RlIG1lCg==
+```
+
+Dekodiranje base64:
+
+```shell
+echo "ZW5jb2RlIG1lCg==" | openssl enc -base64 -d
+```
+
+Enkripcija [AES-256](https://www.ipswitch.com/blog/use-aes-256-encryption-secure-data) algoritmom:
+
+```shell
+echo "korisnik@korisnik.hr" | openssl enc --aes-256-ctr -a 
+
+enter AES-256-CTR encryption password: mojTajniPass
+U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==
+```
+
+Kako ćemo napraviti autorizaciju PHP kodom?
+
+```php=
+<?php
+
+$request_headers = getallheaders();
+if (array_key_exists("Authorization", $request_headers) && $request_headers["Authorization"] == "U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==") {
+    echo "<p>Tajni podaci NASA USA CIA</p>\n";
+} else {
+    http_response_code(401);
+    echo "<p>Ruski hakleru bizi!</p>\n";
+}
+```
+
+Pokrenimo kod i testirajmo:
+
+```shell
+lljubojevic@IdeaPad5-Pro:~/Desktop$ mkdir public
+lljubojevic@IdeaPad5-Pro:~/Desktop$ mv moj2php.php public/index.php
+lljubojevic@IdeaPad5-Pro:~/Desktop$ php -S localhost:8000 -t public
+```
+
+Uz prave podatke:
+
+```shell
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -H "Authorization: U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==" http://localhost:8000/
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+> GET / HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/7.81.0
+> Accept: */*
+> Authorization: U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Host: localhost:8000
+< Date: Mon, 07 Nov 2022 18:18:34 GMT
+< Connection: close
+< X-Powered-By: PHP/8.1.2-1ubuntu2.6
+< Content-type: text/html; charset=UTF-8
+< 
+<p>Tajni podaci NASA USA CIA</p>
+* Closing connection 0
+```
+
+Uz krive podatke:
+
+```shell
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -H "Authorization: grinc" http://localhost:8000/
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+> GET / HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/7.81.0
+> Accept: */*
+> Authorization: grinc
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 401 Unauthorized
+< Host: localhost:8000
+< Date: Mon, 07 Nov 2022 18:18:15 GMT
+< Connection: close
+< X-Powered-By: PHP/8.1.2-1ubuntu2.6
+< Content-type: text/html; charset=UTF-8
+< 
+<p>Ruski hakleru bizi!</p>
+* Closing connection 0
+```
+
+[gaseri](gaseri.org) - Implementacija autentifikacije
+> RFC 7235 naslovljen Hypertext Transfer Protocol (HTTP/1.1): Authentication definira općeniti autenfikacijski okvir na način:
+>Klijent šalje zahtjev za resursom, a poslužitelj šalje odgovor sa statusnim kodom 401 Unauthorized ... koji sadrži informacije o tome kako se autentificirati i zaglavlje WWW-Authenticate s najmanje jednim izazovom...
+>Klijent koji se želi autentificirati s poslužiteljem će poslati zahtjev koji sadrži zaglavlje Authorization s tipom vjerodajnicama autorizacije.
+Kako to radi u PHP-u? [gaseri](gaseri.org)
+> U jeziku PHP moguće je implementirati HTTP autentifikaciju korištenjem funkcije header() za slanje HTTP zaglavlja WWW-Authenticate s odgovarajućom vrijednosti i, kao i ranije, funkcije http_response_code() za postavljanje statusnog koda 401 Unauthorized u odgovoru na zahtjev.
+> Nakon primanja idućeg zahtjeva koji sadrži zaglavlje Authorization s odgovarajućom vrijednosti, u polju $_SERVER su dodane vrijednosti $_SERVER["AUTH_TYPE"], $_SERVER["PHP_AUTH_USER"] i $_SERVER["PHP_AUTH_PW"] koje sadrže tip autentifikacije, korisničko ime i zaporku (respektivno).
+
+PHP autentifikacija
+
+```php=
+<?php
+if ($_SERVER["PHP_AUTH_USER"] == 'ilijacvorovic' && $_SERVER["PHP_AUTH_PW"] == 'sokol' ) {
+    $user = $_SERVER["PHP_AUTH_USER"];
+    $pw = $_SERVER["PHP_AUTH_PW"];
+    echo "<p>Halo, ovdje $user...</p>\n";
+} else {
+    http_response_code(401);
+    header("WWW-Authenticate: Basic realm=\"Tajni laboratorij Odjela za informatiku\"");
+    echo "<p>Moze centrala pogrijesiti jednom ali ne 100 puta!.</p>\n";
+}
+```
+
+Testiranje s ispravnim loginom:
+
+```shell
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -u ilijacvorovic:sokol http://localhost:8000/*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+* Server auth using Basic with user 'ilijacvorovic'
+> GET / HTTP/1.1
+> Host: localhost:8000
+> Authorization: Basic aWxpamFjdm9yb3ZpYzpzb2tvbA==
+> User-Agent: curl/7.81.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Host: localhost:8000
+< Date: Mon, 07 Nov 2022 18:24:06 GMT
+< Connection: close
+< X-Powered-By: PHP/8.1.2-1ubuntu2.6
+< Content-type: text/html; charset=UTF-8
+< 
+<p>Halo, ovdje ilijacvorovic...</p>
+* Closing connection 0
+```
+
+Testiranje s neispravnim loginom:
+
+```shell
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -u jakovljevic:sokol http://localhost:8000/
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+* Server auth using Basic with user 'jakovljevic'
+> GET / HTTP/1.1
+> Host: localhost:8000
+> Authorization: Basic amFrb3ZsamV2aWM6c29rb2w=
+> User-Agent: curl/7.81.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 401 Unauthorized
+< Host: localhost:8000
+< Date: Mon, 07 Nov 2022 18:24:19 GMT
+< Connection: close
+< X-Powered-By: PHP/8.1.2-1ubuntu2.6
+* Authentication problem. Ignoring this.
+< WWW-Authenticate: Basic realm="Tajni laboratorij Odjela za informatiku"
+< Content-type: text/html; charset=UTF-8
+< 
+<p>Moze centrala pogrijesiti jednom ali ne 100 puta!.</p>
+* Closing connection 0
+```
+
+## Obrada podataka zapisanih u obliku JavaScript Object Notation (JSON) u jeziku PHP
+
+Kako radi json u PHP-u?
+
+```php=
+<?php
+
+$arr1 = ["moja vrijednost", 1, 3.5, true];
+$arr2 = ["moj kljuc" => "moja vrijednost", "broj" => 8, "drugi broj" => 3.5, "je li istina" => true];
+
+$arr3 = $arr2;
+$arr3["polje"] = $arr1;
+$j3 = json_encode($arr3, JSON_PRETTY_PRINT);
+echo $j3;
+```
+
+Kako dekodirati json u php-u?
+
+```php=
+<?php
+$j = '{"firstName":"Ivan","lastName":"Horvat","isAlive":true,"age":19,"address":{"streetAddress":"Radmile Matejčić 2a","city":"Rijeka","state":"Primorsko-goranska županija","postalCode":"51000"},"jobTitle":"junior software engineer","phoneNumbers":[{"type":"home","number":"051/999-999"},{"type":"office","number":"099/999-9999"}],"twitterHandle":"@IvanNajjaciHorvat","children":[],"spouse":null}';
+$person = json_decode($j, true);
+print_r($person);
+```
+
+```shell
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ php index.php 
+Array
+(
+    [firstName] => Ivan
+    [lastName] => Horvat
+    [isAlive] => 1
+    [age] => 19
+    [address] => Array
+        (
+            [streetAddress] => Radmile Matejčić 2a
+            [city] => Rijeka
+            [state] => Primorsko-goranska županija
+            [postalCode] => 51000
+        )
+
+    [jobTitle] => junior software engineer
+    [phoneNumbers] => Array
+        (
+            [0] => Array
+                (
+                    [type] => home
+                    [number] => 051/999-999
+                )
+
+            [1] => Array
+                (
+                    [type] => office
+                    [number] => 099/999-9999
+                )
+
+        )
+
+    [twitterHandle] => @IvanNajjaciHorvat
+    [children] => Array
+        (
+        )
+
+    [spouse] => 
+)
+```
+
+No, to nije "čitki" json.. zato koristimo jq:
+
+```shell
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ echo '{"firstName":"Ivan","lastName":"Horvat","isAlive":true,"age":19,"address":{"streetAddress":"Radmile Matejčić 2a","city":"Rijeka","state":"Primorsko-goranska županija","postalCode":"51000"},"jobTitle":"junior software engineer","phoneNumbers":[{"type":"home","number":"051/999-999"},{"type":"office","number":"099/999-9999"}],"twitterHandle":"@IvanNajjaciHorvat","children":[],"spouse":null}' | jq .
+{
+  "firstName": "Ivan",
+  "lastName": "Horvat",
+  "isAlive": true,
+  "age": 19,
+  "address": {
+    "streetAddress": "Radmile Matejčić 2a",
+    "city": "Rijeka",
+    "state": "Primorsko-goranska županija",
+    "postalCode": "51000"
+  },
+  "jobTitle": "junior software engineer",
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "051/999-999"
+    },
+    {
+      "type": "office",
+      "number": "099/999-9999"
+    }
+  ],
+  "twitterHandle": "@IvanNajjaciHorvat",
+  "children": [],
+  "spouse": null
+}
+```
+
+## HTTP Kolačići i PHP
+
+[gaseri](gaseri.org)
+>HTTP kolačić (engl. HTTP cookie, Wikipedia, više detalja o kolačićima na MDN-u) je maleni dio podataka koji korisnički agent pohranjuje na računalu korisnika kod pregledavanja web sjedišta. Na temelju pohranjenih podataka web sjedište pamti stanje koje je korisnik stvorio svojim pregledavanjem, npr. predmete dodane u košaricu za kupnju, prijavu na zatvoreni dio sjedišta upotrebom određenog korisničkog računa ili tekst prethodnih pretraga arhive audiovizualnih datoteka.
+
+Stvorili smo base64 enkodiranjem neke kolačiće:
+
+```shell
+cGxlbmtp em9raQ== dmxhZG8= ZHpv emVsZW5rbw== emJvZw== dmFz bWkgamU= c2t1cA== cGxpbg== cGEgbmlzYW0= Z2FzZXI=
+```
+
+Napravimo PHP kod koji će pohraniti svakom "prijavljenom" korisniku neki enkritpirani ID u kolačić:
+
+```php=
+<?php
+
+$file = "secretCodesOnFBserver.json";
+if (file_exists($file)) {
+    $j = file_get_contents($file);
+    $data = json_decode($j, true);
+} else {
+    $data = [];
+}
+
+$tokeni = ["cGxlbmtp", "em9raQ==", "dmxhZG8=", "ZHpv", "emVsZW5rbw==","emJvZw==","dmFz","bWkgamU=","c2t1cA==", "cGxpbg==","cGEgbmlzYW0=","Z2FzZXI="];
+
+if ($_SERVER["REQUEST_URI"] == "/login") {
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (array_key_exists("user_id", $_COOKIE) && array_key_exists($_COOKIE["user_id"], $data)) {
+            $user_id = $_COOKIE["user_id"];
+            $prev_token = $data[$user_id];
+            echo "<p>It is I, " . $prev_token . ".</p>\n";
+        } else {
+        http_response_code(404);
+        echo "<p>Hmm.. sneaky? Tor?</p>\n";
+    }
+    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $token_key = array_rand($tokeni);
+    $tokeni = $tokeni[$token_key];
+        echo "<p>You've been Zucced as" . $tokeni . ".</p>\n";
+        if (array_key_exists("user_id", $_COOKIE) && array_key_exists($_COOKIE["user_id"], $data)) {
+            $user_id = $_COOKIE["user_id"];
+            $data[$user_id] = $tokeni;
+        } else {
+            $data[] = $tokeni;
+            $user_id = array_key_last($data);
+            setcookie("user_id", $user_id);
+        }
+    }
+}
+
+$j = json_encode($data);
+file_put_contents($file, $j);
+```
+
+Testirajmo metodama POST i GET s dvije prazne, različite, datoteke:
+
+```shell
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -c cookies.txt -X POST http://localhost:8000/login
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+> POST /login HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/7.81.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Host: localhost:8000
+< Date: Mon, 07 Nov 2022 18:50:00 GMT
+< Connection: close
+< X-Powered-By: PHP/8.1.2-1ubuntu2.6
+* Added cookie user_id="0" for domain localhost, path /, expire 0
+< Set-Cookie: user_id=0
+< Content-type: text/html; charset=UTF-8
+< 
+<p>You've been Zucced asem9raQ==.</p>
+* Closing connection 0
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ ls
+cookies.txt  index.php  secretCodesOnFBserver.json
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ cat cookies.txt 
+# Netscape HTTP Cookie File
+# https://curl.se/docs/http-cookies.html
+# This file was generated by libcurl! Edit at your own risk.
+
+localhost       FALSE   /       FALSE   0       user_id 0
+
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -b cookies.txt http://localhost:8000/login
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+> GET /login HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/7.81.0
+> Accept: */*
+> Cookie: user_id=0
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Host: localhost:8000
+< Date: Mon, 07 Nov 2022 18:50:23 GMT
+< Connection: close
+< X-Powered-By: PHP/8.1.2-1ubuntu2.6
+< Content-type: text/html; charset=UTF-8
+< 
+<p>It is I, em9raQ==.</p>
+* Closing connection 0
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -b cookies.txt -X POST http://localhost:8000/login
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+> POST /login HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/7.81.0
+> Accept: */*
+> Cookie: user_id=0
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Host: localhost:8000
+< Date: Mon, 07 Nov 2022 18:50:40 GMT
+< Connection: close
+< X-Powered-By: PHP/8.1.2-1ubuntu2.6
+< Content-type: text/html; charset=UTF-8
+< 
+<p>You've been Zucced asbWkgamU=.</p>
+* Closing connection 0
+
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$  curl -v -c cookies-new.txt -X POST http://localhost:8000/login
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+> POST /login HTTP/1.1
+> Host: localhost:8000
+> User-Agent: curl/7.81.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Host: localhost:8000
+< Date: Mon, 07 Nov 2022 18:51:32 GMT
+< Connection: close
+< X-Powered-By: PHP/8.1.2-1ubuntu2.6
+* Added cookie user_id="1" for domain localhost, path /, expire 0
+< Set-Cookie: user_id=1
+< Content-type: text/html; charset=UTF-8
+< 
+<p>You've been Zucced asZHpv.</p>
+* Closing connection 0
 ```
