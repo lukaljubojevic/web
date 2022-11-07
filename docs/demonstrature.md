@@ -552,7 +552,7 @@ Stvorili smo base64 enkodiranjem neke kolačiće:
 cGxlbmtp em9raQ== dmxhZG8= ZHpv emVsZW5rbw== emJvZw== dmFz bWkgamU= c2t1cA== cGxpbg== cGEgbmlzYW0= Z2FzZXI=
 ```
 
-Napravimo PHP kod koji će pohraniti svakom "prijavljenom" korisniku neki enkritpirani ID u kolačić:
+Napravimo PHP kod koji će pohraniti svakom "prijavljenom" korisniku neki enkriptirani ID u kolačić:
 
 ```php
 <?php

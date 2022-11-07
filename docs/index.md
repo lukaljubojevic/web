@@ -1,10 +1,9 @@
 # Welcome to Luka Ljubojevic
 
-## Whats here?
+## What's here?
 
-* [Who am I?](/docs/about.md)
-* [Materials for exercising Computer Networks](/docs/demonstrature.md)
-* [Some random - for education purposes - useful Linux tutorials](/docs/notes.md)
+* [Who am I?](https://lukaljubojevic.github.io/web/about.html)
+* [Materials for exercising Computer Networks](https://lukaljubojevic.github.io/web/demonstrature.html)
+* [Some random - for education purposes - useful Linux tutorials](https://lukaljubojevic.github.io/web/notes.html)
 
-A meme:
-HTTP404 Meme not found :(
+![meme](https://pics.me.me/live-breaking-news-hackers-managed-to-exit-vim-18-44-asked-48017723.png)
