@@ -300,7 +300,7 @@ U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==
 
 Kako ćemo napraviti autorizaciju PHP kodom?
 
-```php=
+```php
 <?php
 
 $request_headers = getallheaders();
@@ -378,7 +378,7 @@ Kako to radi u PHP-u? [gaseri](gaseri.org)
 
 PHP autentifikacija
 
-```php=
+```php
 <?php
 if ($_SERVER["PHP_AUTH_USER"] == 'ilijacvorovic' && $_SERVER["PHP_AUTH_PW"] == 'sokol' ) {
     $user = $_SERVER["PHP_AUTH_USER"];
@@ -446,7 +446,7 @@ lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -u jakovljevic:sokol http://l
 
 Kako radi json u PHP-u?
 
-```php=
+```php
 <?php
 
 $arr1 = ["moja vrijednost", 1, 3.5, true];
@@ -460,7 +460,7 @@ echo $j3;
 
 Kako dekodirati json u php-u?
 
-```php=
+```php
 <?php
 $j = '{"firstName":"Ivan","lastName":"Horvat","isAlive":true,"age":19,"address":{"streetAddress":"Radmile Matejčić 2a","city":"Rijeka","state":"Primorsko-goranska županija","postalCode":"51000"},"jobTitle":"junior software engineer","phoneNumbers":[{"type":"home","number":"051/999-999"},{"type":"office","number":"099/999-9999"}],"twitterHandle":"@IvanNajjaciHorvat","children":[],"spouse":null}';
 $person = json_decode($j, true);
@@ -554,7 +554,7 @@ cGxlbmtp em9raQ== dmxhZG8= ZHpv emVsZW5rbw== emJvZw== dmFz bWkgamU= c2t1cA== cGx
 
 Napravimo PHP kod koji će pohraniti svakom "prijavljenom" korisniku neki enkritpirani ID u kolačić:
 
-```php=
+```php
 <?php
 
 $file = "secretCodesOnFBserver.json";
