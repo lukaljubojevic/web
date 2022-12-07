@@ -9,11 +9,12 @@
         <meta name="description" content="My site">
       
       
+      
         <meta name="author" content="Luka Ljubojevic">
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.2.3">
     
     
       
@@ -21,31 +22,28 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.20d9efc8.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.f7f47774.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
         
       
-      
-
     
     
     
       
-        
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
     
       
 
-    
+
     
     
   </head>
@@ -61,8 +59,9 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
   
     
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -79,19 +78,16 @@
       
     </div>
     
-    
-      
-
-<header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Zaglavlje">
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="Luka Ljubojevic" class="md-header__button md-logo" aria-label="Luka Ljubojevic" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -117,7 +113,7 @@
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
             </label>
           
         
@@ -126,7 +122,7 @@
           <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
             </label>
           
         
@@ -135,21 +131,22 @@
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+<div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Pretraživanje" placeholder="Pretraživanje" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Pretraživanje">
+      <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" title="Očisti" aria-label="Očisti" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
         </button>
       </nav>
       
@@ -158,7 +155,7 @@
       <div class="md-search__scrollwrap" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Inicijaliziranje pretraživanja
+            Initializing search
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -169,7 +166,6 @@
     
     
   </nav>
-  
 </header>
     
     <div class="md-container" data-md-component="container">
@@ -177,8 +173,7 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="Kartice" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
@@ -227,7 +222,6 @@
     </ul>
   </div>
 </nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -243,12 +237,12 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigacija" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="Luka Ljubojevic" class="md-nav__button md-logo" aria-label="Luka Ljubojevic" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     Luka Ljubojevic
@@ -298,7 +292,6 @@
       </a>
       
         
-
 <nav class="md-nav md-nav--secondary" aria-label="Sadržaj">
   
   
@@ -404,6 +397,41 @@
         <li class="md-nav__item">
   <a href="#komunikacija-http-klijenta-i-posluzitelja-curl-php" class="md-nav__link">
     Komunikacija HTTP klijenta i poslužitelja (cURL, PHP)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-autentifikacija-u-jeziku-php" class="md-nav__link">
+    HTTP autentifikacija u jeziku PHP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obrada-podataka-zapisanih-u-obliku-javascript-object-notation-json-u-jeziku-php" class="md-nav__link">
+    Obrada podataka zapisanih u obliku JavaScript Object Notation (JSON) u jeziku PHP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-kolacici-i-php" class="md-nav__link">
+    HTTP Kolačići i PHP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#podmreze" class="md-nav__link">
+    Podmreže
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prevoenje-mreznih-adresa-nat" class="md-nav__link">
+    Prevođenje mrežnih adresa - NAT
   </a>
   
 </li>
@@ -429,30 +457,10 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
-      
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_3">
-          Notes
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
+      <label class="md-nav__link" for="__nav_3">
+        Notes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
       <nav class="md-nav" aria-label="Notes" data-md-level="1">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
@@ -461,7 +469,6 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-              
   
   
   
@@ -472,10 +479,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -486,10 +491,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -500,10 +503,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -514,10 +515,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -528,10 +527,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -542,10 +539,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -556,7 +551,6 @@
     </li>
   
 
-            
           
         </ul>
       </nav>
@@ -576,7 +570,6 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
-
 <nav class="md-nav md-nav--secondary" aria-label="Sadržaj">
   
   
@@ -686,6 +679,41 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#http-autentifikacija-u-jeziku-php" class="md-nav__link">
+    HTTP autentifikacija u jeziku PHP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obrada-podataka-zapisanih-u-obliku-javascript-object-notation-json-u-jeziku-php" class="md-nav__link">
+    Obrada podataka zapisanih u obliku JavaScript Object Notation (JSON) u jeziku PHP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-kolacici-i-php" class="md-nav__link">
+    HTTP Kolačići i PHP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#podmreze" class="md-nav__link">
+    Podmreže
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prevoenje-mreznih-adresa-nat" class="md-nav__link">
+    Prevođenje mrežnih adresa - NAT
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -694,20 +722,20 @@
               </div>
             
           
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
                 
-                  
-
-
-<h1 id="demonstrature-rm">Demonstrature RM</h1>
+                
+                <h1 id="demonstrature-rm">Demonstrature RM</h1>
 <h2 id="kontakt">Kontakt</h2>
-<p>Za sva pitanja:
-<a href="https://www.facebook.com/luka.ljubojevic.946/">Boomerbook</a>
-<a href="tel:0955293804">Whatsapp</a>
-<a href="https://www.instagram.com/lukaljubojevic1/">Instagram</a>
-Iza 22h</p>
+<p>Za sva pitanja:</p>
+<ul>
+<li><a href="https://www.facebook.com/luka.ljubojevic.946/">Boomerbook</a></li>
+<li><a href="tel:0955293804">Whatsapp</a></li>
+<li><a href="https://www.instagram.com/lukaljubojevic1/">Instagram</a></li>
+</ul>
+<p>Iza 22h</p>
 <h2 id="instalacija-linuxa">Instalacija Linuxa</h2>
 <ol>
 <li><a href="https://docs.kde.org/trunk5/en/partitionmanager/partitionmanager/howto-resizepartition.html">Resize disk</a> -- ovo zna dugo trajati..<ul>
@@ -948,29 +976,507 @@ if (!isset(vrijednost)){
 </ul>
 <pre><code class="language-php">echo &quot;&quot;&lt;p&gt;Moja poruka&lt;/p&gt;\n&quot;;
 </code></pre>
+<h2 id="http-autentifikacija-u-jeziku-php">HTTP autentifikacija u jeziku PHP</h2>
+<ul>
+<li>HTTP Basic autentifikacija koristi base64 enkodirano korisničko ime i lozinku, naravno mi možemo i kriptirati naše podatke kojim god cipherom želimo..:</li>
+<li>više na <a href="https://gaseri.org/hr/nastava/kolegiji/MMOS/">MMOS</a> kolegiju</li>
+</ul>
+<pre><code class="language-shell">openssl enc -chiphers
+</code></pre>
+<p>Kodiranje base64:</p>
+<pre><code class="language-shell">echo -n &quot;encode me&quot; | openssl enc -base64
+ZW5jb2RlIG1lCg==
+</code></pre>
+<p>Dekodiranje base64:</p>
+<pre><code class="language-shell">echo &quot;ZW5jb2RlIG1lCg==&quot; | openssl enc -base64 -d
+</code></pre>
+<p>Enkripcija <a href="https://www.ipswitch.com/blog/use-aes-256-encryption-secure-data">AES-256</a> algoritmom:</p>
+<pre><code class="language-shell">echo &quot;korisnik@korisnik.hr&quot; | openssl enc --aes-256-ctr -a 
+
+enter AES-256-CTR encryption password: mojTajniPass
+U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==
+</code></pre>
+<p>Kako ćemo napraviti autorizaciju PHP kodom?</p>
+<pre><code class="language-php">&lt;?php
+
+$request_headers = getallheaders();
+if (array_key_exists(&quot;Authorization&quot;, $request_headers) &amp;&amp; $request_headers[&quot;Authorization&quot;] == &quot;U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==&quot;) {
+    echo &quot;&lt;p&gt;Tajni podaci NASA USA CIA&lt;/p&gt;\n&quot;;
+} else {
+    http_response_code(401);
+    echo &quot;&lt;p&gt;Ruski hakleru bizi!&lt;/p&gt;\n&quot;;
+}
+</code></pre>
+<p>Pokrenimo kod i testirajmo:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop$ mkdir public
+lljubojevic@IdeaPad5-Pro:~/Desktop$ mv moj2php.php public/index.php
+lljubojevic@IdeaPad5-Pro:~/Desktop$ php -S localhost:8000 -t public
+</code></pre>
+<p>Uz prave podatke:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -H &quot;Authorization: U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==&quot; http://localhost:8000/
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+&gt; GET / HTTP/1.1
+&gt; Host: localhost:8000
+&gt; User-Agent: curl/7.81.0
+&gt; Accept: */*
+&gt; Authorization: U2FsdGVkX1/Ur0/Zu2FDjsy0JJOza58AXskxvEViOwEQ2hpVhA==
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 200 OK
+&lt; Host: localhost:8000
+&lt; Date: Mon, 07 Nov 2022 18:18:34 GMT
+&lt; Connection: close
+&lt; X-Powered-By: PHP/8.1.2-1ubuntu2.6
+&lt; Content-type: text/html; charset=UTF-8
+&lt; 
+&lt;p&gt;Tajni podaci NASA USA CIA&lt;/p&gt;
+* Closing connection 0
+</code></pre>
+<p>Uz krive podatke:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -H &quot;Authorization: grinc&quot; http://localhost:8000/
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+&gt; GET / HTTP/1.1
+&gt; Host: localhost:8000
+&gt; User-Agent: curl/7.81.0
+&gt; Accept: */*
+&gt; Authorization: grinc
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 401 Unauthorized
+&lt; Host: localhost:8000
+&lt; Date: Mon, 07 Nov 2022 18:18:15 GMT
+&lt; Connection: close
+&lt; X-Powered-By: PHP/8.1.2-1ubuntu2.6
+&lt; Content-type: text/html; charset=UTF-8
+&lt; 
+&lt;p&gt;Ruski hakleru bizi!&lt;/p&gt;
+* Closing connection 0
+</code></pre>
+<p><a href="gaseri.org">gaseri</a> - Implementacija autentifikacije</p>
+<blockquote>
+<p>RFC 7235 naslovljen Hypertext Transfer Protocol (HTTP/1.1): Authentication definira općeniti autenfikacijski okvir na način:
+Klijent šalje zahtjev za resursom, a poslužitelj šalje odgovor sa statusnim kodom 401 Unauthorized ... koji sadrži informacije o tome kako se autentificirati i zaglavlje WWW-Authenticate s najmanje jednim izazovom...
+Klijent koji se želi autentificirati s poslužiteljem će poslati zahtjev koji sadrži zaglavlje Authorization s tipom vjerodajnicama autorizacije.
+Kako to radi u PHP-u? <a href="gaseri.org">gaseri</a>
+U jeziku PHP moguće je implementirati HTTP autentifikaciju korištenjem funkcije header() za slanje HTTP zaglavlja WWW-Authenticate s odgovarajućom vrijednosti i, kao i ranije, funkcije http_response_code() za postavljanje statusnog koda 401 Unauthorized u odgovoru na zahtjev.
+Nakon primanja idućeg zahtjeva koji sadrži zaglavlje Authorization s odgovarajućom vrijednosti, u polju $_SERVER su dodane vrijednosti $_SERVER["AUTH_TYPE"], $_SERVER["PHP_AUTH_USER"] i $_SERVER["PHP_AUTH_PW"] koje sadrže tip autentifikacije, korisničko ime i zaporku (respektivno).</p>
+</blockquote>
+<p>PHP autentifikacija</p>
+<pre><code class="language-php">&lt;?php
+if ($_SERVER[&quot;PHP_AUTH_USER&quot;] == 'ilijacvorovic' &amp;&amp; $_SERVER[&quot;PHP_AUTH_PW&quot;] == 'sokol' ) {
+    $user = $_SERVER[&quot;PHP_AUTH_USER&quot;];
+    $pw = $_SERVER[&quot;PHP_AUTH_PW&quot;];
+    echo &quot;&lt;p&gt;Halo, ovdje $user...&lt;/p&gt;\n&quot;;
+} else {
+    http_response_code(401);
+    header(&quot;WWW-Authenticate: Basic realm=\&quot;Tajni laboratorij Odjela za informatiku\&quot;&quot;);
+    echo &quot;&lt;p&gt;Moze centrala pogrijesiti jednom ali ne 100 puta!.&lt;/p&gt;\n&quot;;
+}
+</code></pre>
+<p>Testiranje s ispravnim loginom:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -u ilijacvorovic:sokol http://localhost:8000/*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+* Server auth using Basic with user 'ilijacvorovic'
+&gt; GET / HTTP/1.1
+&gt; Host: localhost:8000
+&gt; Authorization: Basic aWxpamFjdm9yb3ZpYzpzb2tvbA==
+&gt; User-Agent: curl/7.81.0
+&gt; Accept: */*
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 200 OK
+&lt; Host: localhost:8000
+&lt; Date: Mon, 07 Nov 2022 18:24:06 GMT
+&lt; Connection: close
+&lt; X-Powered-By: PHP/8.1.2-1ubuntu2.6
+&lt; Content-type: text/html; charset=UTF-8
+&lt; 
+&lt;p&gt;Halo, ovdje ilijacvorovic...&lt;/p&gt;
+* Closing connection 0
+</code></pre>
+<p>Testiranje s neispravnim loginom:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -u jakovljevic:sokol http://localhost:8000/
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+* Server auth using Basic with user 'jakovljevic'
+&gt; GET / HTTP/1.1
+&gt; Host: localhost:8000
+&gt; Authorization: Basic amFrb3ZsamV2aWM6c29rb2w=
+&gt; User-Agent: curl/7.81.0
+&gt; Accept: */*
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 401 Unauthorized
+&lt; Host: localhost:8000
+&lt; Date: Mon, 07 Nov 2022 18:24:19 GMT
+&lt; Connection: close
+&lt; X-Powered-By: PHP/8.1.2-1ubuntu2.6
+* Authentication problem. Ignoring this.
+&lt; WWW-Authenticate: Basic realm=&quot;Tajni laboratorij Odjela za informatiku&quot;
+&lt; Content-type: text/html; charset=UTF-8
+&lt; 
+&lt;p&gt;Moze centrala pogrijesiti jednom ali ne 100 puta!.&lt;/p&gt;
+* Closing connection 0
+</code></pre>
+<h2 id="obrada-podataka-zapisanih-u-obliku-javascript-object-notation-json-u-jeziku-php">Obrada podataka zapisanih u obliku JavaScript Object Notation (JSON) u jeziku PHP</h2>
+<p>Kako radi json u PHP-u?</p>
+<pre><code class="language-php">&lt;?php
+
+$arr1 = [&quot;moja vrijednost&quot;, 1, 3.5, true];
+$arr2 = [&quot;moj kljuc&quot; =&gt; &quot;moja vrijednost&quot;, &quot;broj&quot; =&gt; 8, &quot;drugi broj&quot; =&gt; 3.5, &quot;je li istina&quot; =&gt; true];
+
+$arr3 = $arr2;
+$arr3[&quot;polje&quot;] = $arr1;
+$j3 = json_encode($arr3, JSON_PRETTY_PRINT);
+echo $j3;
+</code></pre>
+<p>Kako dekodirati json u php-u?</p>
+<pre><code class="language-php">&lt;?php
+$j = '{&quot;firstName&quot;:&quot;Ivan&quot;,&quot;lastName&quot;:&quot;Horvat&quot;,&quot;isAlive&quot;:true,&quot;age&quot;:19,&quot;address&quot;:{&quot;streetAddress&quot;:&quot;Radmile Matejčić 2a&quot;,&quot;city&quot;:&quot;Rijeka&quot;,&quot;state&quot;:&quot;Primorsko-goranska županija&quot;,&quot;postalCode&quot;:&quot;51000&quot;},&quot;jobTitle&quot;:&quot;junior software engineer&quot;,&quot;phoneNumbers&quot;:[{&quot;type&quot;:&quot;home&quot;,&quot;number&quot;:&quot;051/999-999&quot;},{&quot;type&quot;:&quot;office&quot;,&quot;number&quot;:&quot;099/999-9999&quot;}],&quot;twitterHandle&quot;:&quot;@IvanNajjaciHorvat&quot;,&quot;children&quot;:[],&quot;spouse&quot;:null}';
+$person = json_decode($j, true);
+print_r($person);
+</code></pre>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ php index.php 
+Array
+(
+    [firstName] =&gt; Ivan
+    [lastName] =&gt; Horvat
+    [isAlive] =&gt; 1
+    [age] =&gt; 19
+    [address] =&gt; Array
+        (
+            [streetAddress] =&gt; Radmile Matejčić 2a
+            [city] =&gt; Rijeka
+            [state] =&gt; Primorsko-goranska županija
+            [postalCode] =&gt; 51000
+        )
+
+    [jobTitle] =&gt; junior software engineer
+    [phoneNumbers] =&gt; Array
+        (
+            [0] =&gt; Array
+                (
+                    [type] =&gt; home
+                    [number] =&gt; 051/999-999
+                )
+
+            [1] =&gt; Array
+                (
+                    [type] =&gt; office
+                    [number] =&gt; 099/999-9999
+                )
+
+        )
+
+    [twitterHandle] =&gt; @IvanNajjaciHorvat
+    [children] =&gt; Array
+        (
+        )
+
+    [spouse] =&gt; 
+)
+</code></pre>
+<p>No, to nije "čitki" json.. zato koristimo jq:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ echo '{&quot;firstName&quot;:&quot;Ivan&quot;,&quot;lastName&quot;:&quot;Horvat&quot;,&quot;isAlive&quot;:true,&quot;age&quot;:19,&quot;address&quot;:{&quot;streetAddress&quot;:&quot;Radmile Matejčić 2a&quot;,&quot;city&quot;:&quot;Rijeka&quot;,&quot;state&quot;:&quot;Primorsko-goranska županija&quot;,&quot;postalCode&quot;:&quot;51000&quot;},&quot;jobTitle&quot;:&quot;junior software engineer&quot;,&quot;phoneNumbers&quot;:[{&quot;type&quot;:&quot;home&quot;,&quot;number&quot;:&quot;051/999-999&quot;},{&quot;type&quot;:&quot;office&quot;,&quot;number&quot;:&quot;099/999-9999&quot;}],&quot;twitterHandle&quot;:&quot;@IvanNajjaciHorvat&quot;,&quot;children&quot;:[],&quot;spouse&quot;:null}' | jq .
+{
+  &quot;firstName&quot;: &quot;Ivan&quot;,
+  &quot;lastName&quot;: &quot;Horvat&quot;,
+  &quot;isAlive&quot;: true,
+  &quot;age&quot;: 19,
+  &quot;address&quot;: {
+    &quot;streetAddress&quot;: &quot;Radmile Matejčić 2a&quot;,
+    &quot;city&quot;: &quot;Rijeka&quot;,
+    &quot;state&quot;: &quot;Primorsko-goranska županija&quot;,
+    &quot;postalCode&quot;: &quot;51000&quot;
+  },
+  &quot;jobTitle&quot;: &quot;junior software engineer&quot;,
+  &quot;phoneNumbers&quot;: [
+    {
+      &quot;type&quot;: &quot;home&quot;,
+      &quot;number&quot;: &quot;051/999-999&quot;
+    },
+    {
+      &quot;type&quot;: &quot;office&quot;,
+      &quot;number&quot;: &quot;099/999-9999&quot;
+    }
+  ],
+  &quot;twitterHandle&quot;: &quot;@IvanNajjaciHorvat&quot;,
+  &quot;children&quot;: [],
+  &quot;spouse&quot;: null
+}
+</code></pre>
+<h2 id="http-kolacici-i-php">HTTP Kolačići i PHP</h2>
+<p><a href="gaseri.org">gaseri</a></p>
+<blockquote>
+<p>HTTP kolačić (engl. HTTP cookie, Wikipedia, više detalja o kolačićima na MDN-u) je maleni dio podataka koji korisnički agent pohranjuje na računalu korisnika kod pregledavanja web sjedišta. Na temelju pohranjenih podataka web sjedište pamti stanje koje je korisnik stvorio svojim pregledavanjem, npr. predmete dodane u košaricu za kupnju, prijavu na zatvoreni dio sjedišta upotrebom određenog korisničkog računa ili tekst prethodnih pretraga arhive audiovizualnih datoteka.</p>
+</blockquote>
+<p>Stvorili smo base64 enkodiranjem neke kolačiće:</p>
+<pre><code class="language-shell">cGxlbmtp em9raQ== dmxhZG8= ZHpv emVsZW5rbw== emJvZw== dmFz bWkgamU= c2t1cA== cGxpbg== cGEgbmlzYW0= Z2FzZXI=
+</code></pre>
+<p>Napravimo PHP kod koji će pohraniti svakom "prijavljenom" korisniku neki enkriptirani ID u kolačić:</p>
+<pre><code class="language-php">&lt;?php
+
+$file = &quot;secretCodesOnFBserver.json&quot;;
+if (file_exists($file)) {
+    $j = file_get_contents($file);
+    $data = json_decode($j, true);
+} else {
+    $data = [];
+}
+
+$tokeni = [&quot;cGxlbmtp&quot;, &quot;em9raQ==&quot;, &quot;dmxhZG8=&quot;, &quot;ZHpv&quot;, &quot;emVsZW5rbw==&quot;,&quot;emJvZw==&quot;,&quot;dmFz&quot;,&quot;bWkgamU=&quot;,&quot;c2t1cA==&quot;, &quot;cGxpbg==&quot;,&quot;cGEgbmlzYW0=&quot;,&quot;Z2FzZXI=&quot;];
+
+if ($_SERVER[&quot;REQUEST_URI&quot;] == &quot;/login&quot;) {
+    if ($_SERVER[&quot;REQUEST_METHOD&quot;] == &quot;GET&quot;) {
+        if (array_key_exists(&quot;user_id&quot;, $_COOKIE) &amp;&amp; array_key_exists($_COOKIE[&quot;user_id&quot;], $data)) {
+            $user_id = $_COOKIE[&quot;user_id&quot;];
+            $prev_token = $data[$user_id];
+            echo &quot;&lt;p&gt;It is I, &quot; . $prev_token . &quot;.&lt;/p&gt;\n&quot;;
+        } else {
+        http_response_code(404);
+        echo &quot;&lt;p&gt;Hmm.. sneaky? Tor?&lt;/p&gt;\n&quot;;
+    }
+    } else if ($_SERVER[&quot;REQUEST_METHOD&quot;] == &quot;POST&quot;) {
+        $token_key = array_rand($tokeni);
+    $tokeni = $tokeni[$token_key];
+        echo &quot;&lt;p&gt;You've been Zucced as&quot; . $tokeni . &quot;.&lt;/p&gt;\n&quot;;
+        if (array_key_exists(&quot;user_id&quot;, $_COOKIE) &amp;&amp; array_key_exists($_COOKIE[&quot;user_id&quot;], $data)) {
+            $user_id = $_COOKIE[&quot;user_id&quot;];
+            $data[$user_id] = $tokeni;
+        } else {
+            $data[] = $tokeni;
+            $user_id = array_key_last($data);
+            setcookie(&quot;user_id&quot;, $user_id);
+        }
+    }
+}
+
+$j = json_encode($data);
+file_put_contents($file, $j);
+</code></pre>
+<p>Testirajmo metodama POST i GET s dvije prazne, različite, datoteke:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -c cookies.txt -X POST http://localhost:8000/login
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+&gt; POST /login HTTP/1.1
+&gt; Host: localhost:8000
+&gt; User-Agent: curl/7.81.0
+&gt; Accept: */*
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 200 OK
+&lt; Host: localhost:8000
+&lt; Date: Mon, 07 Nov 2022 18:50:00 GMT
+&lt; Connection: close
+&lt; X-Powered-By: PHP/8.1.2-1ubuntu2.6
+* Added cookie user_id=&quot;0&quot; for domain localhost, path /, expire 0
+&lt; Set-Cookie: user_id=0
+&lt; Content-type: text/html; charset=UTF-8
+&lt; 
+&lt;p&gt;You've been Zucced asem9raQ==.&lt;/p&gt;
+* Closing connection 0
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ ls
+cookies.txt  index.php  secretCodesOnFBserver.json
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ cat cookies.txt 
+# Netscape HTTP Cookie File
+# https://curl.se/docs/http-cookies.html
+# This file was generated by libcurl! Edit at your own risk.
+
+localhost       FALSE   /       FALSE   0       user_id 0
+
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -b cookies.txt http://localhost:8000/login
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+&gt; GET /login HTTP/1.1
+&gt; Host: localhost:8000
+&gt; User-Agent: curl/7.81.0
+&gt; Accept: */*
+&gt; Cookie: user_id=0
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 200 OK
+&lt; Host: localhost:8000
+&lt; Date: Mon, 07 Nov 2022 18:50:23 GMT
+&lt; Connection: close
+&lt; X-Powered-By: PHP/8.1.2-1ubuntu2.6
+&lt; Content-type: text/html; charset=UTF-8
+&lt; 
+&lt;p&gt;It is I, em9raQ==.&lt;/p&gt;
+* Closing connection 0
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$ curl -v -b cookies.txt -X POST http://localhost:8000/login
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+&gt; POST /login HTTP/1.1
+&gt; Host: localhost:8000
+&gt; User-Agent: curl/7.81.0
+&gt; Accept: */*
+&gt; Cookie: user_id=0
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 200 OK
+&lt; Host: localhost:8000
+&lt; Date: Mon, 07 Nov 2022 18:50:40 GMT
+&lt; Connection: close
+&lt; X-Powered-By: PHP/8.1.2-1ubuntu2.6
+&lt; Content-type: text/html; charset=UTF-8
+&lt; 
+&lt;p&gt;You've been Zucced asbWkgamU=.&lt;/p&gt;
+* Closing connection 0
+
+lljubojevic@IdeaPad5-Pro:~/Desktop/public$  curl -v -c cookies-new.txt -X POST http://localhost:8000/login
+*   Trying 127.0.0.1:8000...
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+&gt; POST /login HTTP/1.1
+&gt; Host: localhost:8000
+&gt; User-Agent: curl/7.81.0
+&gt; Accept: */*
+&gt; 
+* Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 200 OK
+&lt; Host: localhost:8000
+&lt; Date: Mon, 07 Nov 2022 18:51:32 GMT
+&lt; Connection: close
+&lt; X-Powered-By: PHP/8.1.2-1ubuntu2.6
+* Added cookie user_id=&quot;1&quot; for domain localhost, path /, expire 0
+&lt; Set-Cookie: user_id=1
+&lt; Content-type: text/html; charset=UTF-8
+&lt; 
+&lt;p&gt;You've been Zucced asZHpv.&lt;/p&gt;
+* Closing connection 0
+</code></pre>
+<h2 id="podmreze">Podmreže</h2>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+<h2 id="prevoenje-mreznih-adresa-nat">Prevođenje mrežnih adresa - NAT</h2>
+<p>Ako promotrite ovaj simbolični prikaz "arhitekture" interneta.. sigurno si postavljate pitanje kako je moguće da dvije podmreže na svijetu imaju istu IP adresu. To se kosi s onim što ste do sada naučili.</p>
+<p><img alt="NAT - primjer" src="https://i.postimg.cc/HkwcVkN5/image0.jpg" /></p>
+<p>Odgovor na to pitanje je nešto što se naziva NAT (Network Address Translation).</p>
+<blockquote>
+<p>Network Address Translation (NAT) is a service that enables private IP networks to use the internet and cloud. NAT translates private IP addresses in an internal network to a public IP address before packets are sent to an external network.</p>
+</blockquote>
+<p>Kako NAT radi?</p>
+<blockquote>
+<p>Network Address Translation (NAT) is a service that operates on a router or edge platform to connect private networks to public networks like the internet. NAT is often implemented at the WAN edge router to enable internet access in core, campus, branch, and colocation sites. </br>With NAT, an organization needs one IP address or one limited public IP address to represent an entire group of devices as they connect outside their network. Port Address Translation (PAT) enables one single IP to be shared by multiple hosts using IP and port address translation.</p>
+</blockquote>
+<p><img alt="NAT" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.mustbegeek.com%2Fwp-content%2Fuploads%2F2018%2F04%2FConfigure-Dynamic-NAT-in-Cisco-IOS-Router.png&amp;f=1&amp;nofb=1&amp;ipt=e3568bf3f451f4075efaac04a305c517052a4af166c25698646d7043c6df85b6&amp;ipo=images" /></p>
+<p>Vrste NAT-a:</p>
+<ul>
+<li>Statički NAT
+    &gt; Static NAT is a private IP address that is a single unregistered IP that is mapped with a legal Public IP address. Here one to one mapping is made within local and global address which is generally applied for web hosting.</li>
+<li>Dinamički NAT
+    &gt; Dynamic NAT is an unregistered IP address that is private is changed to a registered public address from a group of the public IP address. If the IP address group is occupied, then the packets are transmitted with a fixed number of the private IP address that can be transmitted to the public address</li>
+<li>PAT (Port Address Translation)
+    &gt; Port Address Translation is called NAT overload, where many private IP addresses can be transmitted into unit registered IP addresses. The port numbers are applied to differentiate the traffic flow that belongs to an individual IP address. This is frequently used as a cost-saving method since thousands of servers can be connected to the internet by one real global public IP address.</li>
+</ul>
+<p>Zašto se NAT koristi?</p>
+<ul>
+<li>Štedi IP adrese</li>
+<li>Čuva pouzdanost i fleksibilnost Interneta</li>
+<li>NAT ima posebne metode adresiranja mreže</li>
+<li>Dodaje razinu sigurnosti na mrežu jer se uređajima ne može direktno pristupiti</li>
+</ul>
+<p>A što je onda CGNAT?</p>
+<blockquote>
+<p>CGNAT is a network address translation technique that extends the IPv4 networks on a considerable scale and allows ISPs (internet service providers) to conserve their acquired IPv4 pool.
+Every online user has two IP addresses, a public and a private one. When a user intends to communicate online, the standard NAT protocol translates their private IPv4 address to a public one.
+But with CGNAT (LSN or NAT 444), an extra layer of address translation is added. The unique private IP addresses are translated into public IPs shared by multiple users. And this is how ISPs prevent their IPv4 pool from exhaustion.</p>
+</blockquote>
+<p>Prikaz IPv4 NAT pravila na sustavu:</p>
+<pre><code class="language-shell">lljubojevic@IdeaPad-5-Pro:~$ sudo iptables -t nat -L -n -v
+[sudo] password for lljubojevic:         
+Chain PREROUTING (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination  
+</code></pre>
+<p>NAT tablica preslikavanja:
+<img alt="NAT routing table" src="http://2.bp.blogspot.com/-HzVVp33E6mQ/Vpi2AEEtJII/AAAAAAAAG2c/hOTURmdfduI/s1600/NAT-table-test.jpg" /></p>
+<p>Zašto nam je tu bitan iptables:
+<a href="https://gaseri.org/hr/nastava/materijali/iptables-prevodjenje-adresa/#nacin-prevoenja-adresa-alatom-iptables">iptables - gaseri</a>
+<a href="https://www.ithands-on.com/2021/09/linux-101-ip-tables-and-nat-network.html">iptables example</a></p>
+<p>Definiranje NAT-a na ruteru:</p>
+<ul>
+<li>Uvijek uzmite sučelje na van (za POSTROUTING)</li>
+</ul>
+<pre><code class="language-shell">iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+</code></pre>
+<p>Kako to napraviti kada želimo omogućiti pristup nekom čvoru iz vanjske mreže:</p>
+<ul>
+<li>Na vanjskom ruteru radimo PREROUTING (na unutra) za sve TCP pakete koji dolaze na port 2223 s odredišta (vanjsko sučelje rutera) na odredište u našoj mreži IP:2223</li>
+</ul>
+<pre><code class="language-shell">iptables -t nat -A PREROUTING -p tcp --dport 2223 -d 10.72.0.1 -j DNAT --to-destination 192.168.6.21:2223
+</code></pre>
+<p>A kako napraviti pristup svim vratima putem vanjske adrese rutera?</p>
+<ul>
+<li>Na vanjskom ruteru (rubnom u podmreži) radimo POSTROUTING (na van) svega što dolazi s rutera na neki čvor</li>
+</ul>
+<pre><code class="language-shell">iptables -t nat -A POSTROUTING -o eth0 -j SNAT -s 10.72.0.1 --to-source 192.168.6.22
+</code></pre>
+<p>Vatrozid</p>
+<blockquote>
+<p>Vatrozid u općenitom smislu podrazumijeva uređaj koji nadzire, te na temelju zadanih pravila, propušta ili odbacuje mrežni promet
+Vatrozid promet filtrira na više slojeva, ovisno o namjeni i potrebi (linkto: tcp/ip stack). Najčešće se promet filtrira na IP i transportnom (TCP, UDP ...) sloju, međutim moguće je definirati pravila filtriranja i za niži – sloj podatkovne poveznice (Ethernet ...) i za viši – aplikacijski sloj (HTTP, SMTP ...).</br> Složenost samog filtriranja ovisi o sloju filtriranja, pa tako filtriranje na višim slojevima omogućuje „pametnije“ filtriranje (viši slojevi sadrže više meta-podataka koji omogućuju selektivnije filtriranje), dok je s druge strane postupak filtriranja na nižim slojevima brži.</p>
+</blockquote>
+<p>Detalji na <a href="https://gaseri.org/hr/nastava/materijali/iptables-vatrozid/#laboratorijska-vjezba-3">gaserima</a></p>
+<ul>
+<li>iptables [-t table] {-A|-C|-D} chain rule-specification</li>
+</ul>
+<p>Na primjer ako želimo postaviti vatrozid t.d. s nekih mreža možemo pristupati nekim vratima, a s ostalih ne možemo kao u zadatku:</p>
+<ul>
+<li>Postavite iptables na n1, n2 tako da n5, n6, n7 mogu na n17, n18, n19 pristupati samo vratima 8080, 80 i 8443, a da je pristup ostalim vratima zabranjen.</li>
+</ul>
+<p>Koristit ćemo slijedeće naredbe:</p>
+<pre><code class="language-shell">n1: 
+    iptables -A INPUT -p tcp -s 172.22.0.2/24 --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A INPUT -p tcp -s 172.22.0.2/24 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A INPUT -p tcp -s 172.22.0.2/24 --dport 8443 -m state --state NEW,ESTABLISHED -j ACCEPT 
 
 
+n2: 
+   iptables -A INPUT -p tcp -s 172.22.1.20/24 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.21/24 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.22/24 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
 
+   iptables -A INPUT -p tcp -s 172.22.1.20/24 --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.21/24 --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.22/24 --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
 
-
+   iptables -A INPUT -p tcp -s 172.22.1.20/24 --dport 8443 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.21/24 --dport 8443 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.22/24 --dport 8443 -m state --state NEW,ESTABLISHED -j ACCEPT
+</code></pre>
                 
-              </article>
-            </div>
-          
-          
+              
+              
+                
+
+
+              
+            </article>
+          </div>
         </div>
         
       </main>
       
-        <footer class="md-footer">
+        
+<footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Podnožje" >
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
         <a href="about.html" class="md-footer__link md-footer__link--prev" aria-label="Prethodno: About" rel="prev">
           <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
           <div class="md-footer__title">
             <div class="md-ellipsis">
@@ -994,7 +1500,7 @@ if (!isset(vrijednost)){
             </div>
           </div>
           <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
           </div>
         </a>
       
@@ -1002,15 +1508,14 @@ if (!isset(vrijednost)){
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
       
     </div>
   </div>
@@ -1020,11 +1525,10 @@ if (!isset(vrijednost)){
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["announce.dismiss", "header.autohide", "navigation.instant", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tracking", "toc.follow"], "translations": {"clipboard.copy": "Kopirajte u me\u0111uspremnik", "clipboard.copied": "Kopirano u me\u0111uspremnik", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Pretra\u017eivanje", "search.result.placeholder": "Unesite pojam pretra\u017eivanja", "search.result.none": "Ni\u0161ta nije prona\u0111eno", "search.result.one": "1 rezultat pretra\u017eivanja", "search.result.other": "# rezultata pretra\u017eivanja", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["announce.dismiss", "header.autohide", "navigation.instant", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tracking", "toc.follow"], "search": "assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Kopirano u me\u0111uspremnik", "clipboard.copy": "Kopirajte u me\u0111uspremnik", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Pretra\u017eivanje", "search.result.more.one": "1 rezultat na ovoj stranici", "search.result.more.other": "# rezultata na ovoj stranici", "search.result.none": "Ni\u0161ta nije prona\u0111eno", "search.result.one": "1 rezultat pretra\u017eivanja", "search.result.other": "# rezultata pretra\u017eivanja", "search.result.placeholder": "Unesite pojam pretra\u017eivanja", "search.result.term.missing": "Nedostaje", "select.version.title": "Odabir verzije"}}</script>
     
-    
-      <script src="assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="assets/javascripts/bundle.29db7785.min.js"></script>
       
     
   </body>
