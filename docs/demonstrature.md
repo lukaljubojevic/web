@@ -688,3 +688,127 @@ lljubojevic@IdeaPad5-Pro:~/Desktop/public$  curl -v -c cookies-new.txt -X POST h
 <p>You've been Zucced asZHpv.</p>
 * Closing connection 0
 ```
+
+## Podmreže
+
+> TODO
+
+## Prevođenje mrežnih adresa - NAT
+
+Ako promotrite ovaj simbolični prikaz "arhitekture" interneta.. sigurno si postavljate pitanje kako je moguće da dvije podmreže na svijetu imaju istu IP adresu. To se kosi s onim što ste do sada naučili.
+
+![NAT - primjer](https://i.postimg.cc/HkwcVkN5/image0.jpg)
+
+Odgovor na to pitanje je nešto što se naziva NAT (Network Address Translation).
+
+> Network Address Translation (NAT) is a service that enables private IP networks to use the internet and cloud. NAT translates private IP addresses in an internal network to a public IP address before packets are sent to an external network.
+
+Kako NAT radi?
+> Network Address Translation (NAT) is a service that operates on a router or edge platform to connect private networks to public networks like the internet. NAT is often implemented at the WAN edge router to enable internet access in core, campus, branch, and colocation sites. </br>With NAT, an organization needs one IP address or one limited public IP address to represent an entire group of devices as they connect outside their network. Port Address Translation (PAT) enables one single IP to be shared by multiple hosts using IP and port address translation.
+
+![NAT](https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.mustbegeek.com%2Fwp-content%2Fuploads%2F2018%2F04%2FConfigure-Dynamic-NAT-in-Cisco-IOS-Router.png&f=1&nofb=1&ipt=e3568bf3f451f4075efaac04a305c517052a4af166c25698646d7043c6df85b6&ipo=images)
+
+Vrste NAT-a:
+
+* Statički NAT
+    > Static NAT is a private IP address that is a single unregistered IP that is mapped with a legal Public IP address. Here one to one mapping is made within local and global address which is generally applied for web hosting.
+* Dinamički NAT
+    > Dynamic NAT is an unregistered IP address that is private is changed to a registered public address from a group of the public IP address. If the IP address group is occupied, then the packets are transmitted with a fixed number of the private IP address that can be transmitted to the public address
+* PAT (Port Address Translation)
+    > Port Address Translation is called NAT overload, where many private IP addresses can be transmitted into unit registered IP addresses. The port numbers are applied to differentiate the traffic flow that belongs to an individual IP address. This is frequently used as a cost-saving method since thousands of servers can be connected to the internet by one real global public IP address.
+
+Zašto se NAT koristi?
+
+* Štedi IP adrese
+* Čuva pouzdanost i fleksibilnost Interneta
+* NAT ima posebne metode adresiranja mreže
+* Dodaje razinu sigurnosti na mrežu jer se uređajima ne može direktno pristupiti
+
+A što je onda CGNAT?
+> CGNAT is a network address translation technique that extends the IPv4 networks on a considerable scale and allows ISPs (internet service providers) to conserve their acquired IPv4 pool.
+> Every online user has two IP addresses, a public and a private one. When a user intends to communicate online, the standard NAT protocol translates their private IPv4 address to a public one.
+> But with CGNAT (LSN or NAT 444), an extra layer of address translation is added. The unique private IP addresses are translated into public IPs shared by multiple users. And this is how ISPs prevent their IPv4 pool from exhaustion.
+
+Prikaz IPv4 NAT pravila na sustavu:
+
+```shell
+lljubojevic@IdeaPad-5-Pro:~$ sudo iptables -t nat -L -n -v
+[sudo] password for lljubojevic:         
+Chain PREROUTING (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination  
+```
+
+NAT tablica preslikavanja:
+![NAT routing table](http://2.bp.blogspot.com/-HzVVp33E6mQ/Vpi2AEEtJII/AAAAAAAAG2c/hOTURmdfduI/s1600/NAT-table-test.jpg)
+
+Zašto nam je tu bitan iptables:
+[iptables - gaseri](https://gaseri.org/hr/nastava/materijali/iptables-prevodjenje-adresa/#nacin-prevoenja-adresa-alatom-iptables)
+[iptables example](https://www.ithands-on.com/2021/09/linux-101-ip-tables-and-nat-network.html)
+
+Definiranje NAT-a na ruteru:
+
+* Uvijek uzmite sučelje na van (za POSTROUTING)
+
+```shell
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+```
+
+Kako to napraviti kada želimo omogućiti pristup nekom čvoru iz vanjske mreže:
+
+* Na vanjskom ruteru radimo PREROUTING (na unutra) za sve TCP pakete koji dolaze na port 2223 s odredišta (vanjsko sučelje rutera) na odredište u našoj mreži IP:2223
+
+```shell
+iptables -t nat -A PREROUTING -p tcp --dport 2223 -d 10.72.0.1 -j DNAT --to-destination 192.168.6.21:2223
+```
+
+A kako napraviti pristup svim vratima putem vanjske adrese rutera?
+
+* Na vanjskom ruteru (rubnom u podmreži) radimo POSTROUTING (na van) svega što dolazi s rutera na neki čvor
+
+```shell
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT -s 10.72.0.1 --to-source 192.168.6.22
+```
+
+Vatrozid
+> Vatrozid u općenitom smislu podrazumijeva uređaj koji nadzire, te na temelju zadanih pravila, propušta ili odbacuje mrežni promet
+> Vatrozid promet filtrira na više slojeva, ovisno o namjeni i potrebi (linkto: tcp/ip stack). Najčešće se promet filtrira na IP i transportnom (TCP, UDP ...) sloju, međutim moguće je definirati pravila filtriranja i za niži – sloj podatkovne poveznice (Ethernet ...) i za viši – aplikacijski sloj (HTTP, SMTP ...).</br> Složenost samog filtriranja ovisi o sloju filtriranja, pa tako filtriranje na višim slojevima omogućuje „pametnije“ filtriranje (viši slojevi sadrže više meta-podataka koji omogućuju selektivnije filtriranje), dok je s druge strane postupak filtriranja na nižim slojevima brži.
+
+Detalji na [gaserima](https://gaseri.org/hr/nastava/materijali/iptables-vatrozid/#laboratorijska-vjezba-3)
+
+* iptables [-t table] {-A|-C|-D} chain rule-specification
+
+Na primjer ako želimo postaviti vatrozid t.d. s nekih mreža možemo pristupati nekim vratima, a s ostalih ne možemo kao u zadatku:
+
+* Postavite iptables na n1, n2 tako da n5, n6, n7 mogu na n17, n18, n19 pristupati samo vratima 8080, 80 i 8443, a da je pristup ostalim vratima zabranjen.
+
+Koristit ćemo slijedeće naredbe:
+
+```shell
+n1: 
+    iptables -A INPUT -p tcp -s 172.22.0.2/24 --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A INPUT -p tcp -s 172.22.0.2/24 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+    iptables -A INPUT -p tcp -s 172.22.0.2/24 --dport 8443 -m state --state NEW,ESTABLISHED -j ACCEPT 
+   
+    
+n2: 
+   iptables -A INPUT -p tcp -s 172.22.1.20/24 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.21/24 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.22/24 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+   
+   iptables -A INPUT -p tcp -s 172.22.1.20/24 --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.21/24 --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.22/24 --dport 8080 -m state --state NEW,ESTABLISHED -j ACCEPT
+   
+   iptables -A INPUT -p tcp -s 172.22.1.20/24 --dport 8443 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.21/24 --dport 8443 -m state --state NEW,ESTABLISHED -j ACCEPT
+   iptables -A INPUT -p tcp -s 172.22.1.22/24 --dport 8443 -m state --state NEW,ESTABLISHED -j ACCEPT
+```
