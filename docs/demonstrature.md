@@ -3,11 +3,7 @@
 ## Kontakt
 
 Za sva pitanja:
-
-* [Boomerbook](https://www.facebook.com/luka.ljubojevic.946/)
 * [Whatsapp](tel:0955293804)
-* [Instagram](https://www.instagram.com/lukaljubojevic1/)
-
 Iza 22h
 
 ## Instalacija Linuxa
